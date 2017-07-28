@@ -1,0 +1,41 @@
+<div class="container mb-5">
+
+<p *ngIf="node" class="text-center"><ngb-progressbar type="warning" [value]="node.progress" [striped]="true" [animated]="true">Completed <i>{{node.progress}}%</i></ngb-progressbar>
+<button type="button" class="btn btn-link">Review your pathway</button>
+</p>
+
+<div class="card" *ngIf="node">
+  <div class="card-images" *ngIf="node.images.length">
+    <img *ngFor="let im of node.images" class="card-img-top" [src]="im.src" alt="Card image cap" />
+  </div>
+
+  <div class="card-block">
+    <h4 class="card-title">{{node.title}}</h4>
+    <h6 class="card-subtitle mb-2 text-muted">{{node.subtitle}}</h6>
+    <p class="card-text">
+      {{node.content}}
+    </p>
+    <a href="#" class="card-link">Card link</a>
+    <a href="#" class="card-link">Another link</a>
+  </div>
+ 
+   <div class="card-footer" *ngIf="node.buttons.length">
+   	<strong>What do you want to do next?</strong>
+  		<div class="custom-controls-stacked">
+  		  <label class="custom-control custom-radio mt-3 mb-3 " *ngFor="let b of node.buttons; let i=index" >
+  		    <input name="radio-stacked" type="radio" class="custom-control-input" (change)="onSelectionChange(b.target_node)" value="b.target_node">
+  		    <span class="custom-control-indicator"></span>
+  		    <span class="custom-control-description">{{b.label}}</span>
+  		  </label>
+  		</div>
+  	    <button type="button" (click)="goToAction()" class="text-wrap mt-3 mb-3 btn btn-primary btn-block">Continue</button>
+    </div>
+ 
+   <div class="card-footer" *ngIf="node.final">
+    <strong>Your pathway</strong>
+        {{ pathway | json }}      
+    </div>
+
+ </div>
+
+</div>
