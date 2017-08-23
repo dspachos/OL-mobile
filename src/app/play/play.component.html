@@ -15,8 +15,7 @@
     <p class="card-text">
       {{node.content}}
     </p>
-    <a href="#" class="card-link">Card link</a>
-    <a href="#" class="card-link">Another link</a>
+    <button class="btn card-link btn-sm btn-outline-primary" (click)="open(content)">Supporting information</button>
   </div>
  
    <div class="card-footer" *ngIf="node.buttons.length">
@@ -39,3 +38,18 @@
  </div>
 
 </div>
+
+<ng-template #content let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h4 class="modal-title">Supporting information</h4>
+    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <p>Display node tips here!</p>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="c('Close click')">Close</button>
+  </div>
+</ng-template>

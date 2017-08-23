@@ -1,6 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import {HttpClient} from '@angular/common/http';
+import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-play',
@@ -16,11 +17,33 @@ export class PlayComponent implements OnInit, OnDestroy {
   	pathway: Array<any>=[];
   	node: Array<any>;
   	progress: number;
+  	content: any;
+	closeResult: string;
+
 
   constructor(
+	private modalService: NgbModal,
   	private http: HttpClient,	
   	private route: ActivatedRoute	
   	) {}
+
+	open(content:any) {
+	    this.modalService.open(content).result.then((result) => {
+	      this.closeResult = `Closed with: ${result}`;
+	    }, (reason) => {
+	      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+	    });
+	  }
+
+	  private getDismissReason(reason: any): string {
+	    if (reason === ModalDismissReasons.ESC) {
+	      return 'by pressing ESC';
+	    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+	      return 'by clicking on a backdrop';
+	    } else {
+	      return  `with: ${reason}`;
+	    }
+	  }
 
 	goToAction(){
 		this.node = this.nodes.find( item => item.id==this.choice );
