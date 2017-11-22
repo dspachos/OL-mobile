@@ -1,7 +1,6 @@
 <div class="container mb-5">
 
 <p *ngIf="node" class="text-center"><ngb-progressbar type="warning" [value]="node.progress" [striped]="true" [animated]="true">Completed <i>{{node.progress}}%</i></ngb-progressbar>
-<button type="button" class="btn btn-link">Review your pathway</button>
 </p>
 
 <div class="card" *ngIf="node">
@@ -32,12 +31,48 @@
  
    <div class="card-footer" *ngIf="node.final">
     <strong>Your pathway</strong>
-        {{ pathway | json }}      
+        <div *ngFor="let n of pathway; let i=index">
+          <i class="fa fa-circle-o"></i>  {{ n.title }}
+          <div class="p-3 vline">
+            <div> {{ n.subtitle }}</div>
+            <div><i class="fa fa-clock-o"></i> Time spent: XXs</div>
+          </div>
+          <div *ngIf="n.final">
+            <i class="fa fa-circle-o"></i>  End of virtual patient
+          </div>
+        </div>
     </div>
 
- </div>
+  <div class="m-3 text-center">
+    <button class="btn card-link btn-sm btn-outline-primary" *ngIf="!node.final" (click)="openp(pathwaym)">Review your pathway</button>
+  </div>
 
+ </div>
 </div>
+
+<ng-template #pathwaym let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h4 class="modal-title">Review your pathway</h4>
+    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+      <div *ngFor="let n of pathway; let i=index">
+          <i class="fa fa-circle-o"></i>  {{ n.title }}
+          <div class="p-3 vline">
+            <div> {{ n.subtitle }}</div>
+            <div><i class="fa fa-clock-o"></i> Time spent: XXs</div>
+        </div>
+      </div>
+      <div class="text-success"><i class="fa fa-circle-o"></i>  You are here!</div>
+    
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="c('Close click')">Close</button>
+  </div>
+</ng-template>
+
 
 <ng-template #content let-c="close" let-d="dismiss">
   <div class="modal-header">

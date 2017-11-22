@@ -18,6 +18,7 @@ export class PlayComponent implements OnInit, OnDestroy {
   	node: Array<any>;
   	progress: number;
   	content: any;
+  	pathwaym: any;
 	closeResult: string;
 
 
@@ -27,6 +28,13 @@ export class PlayComponent implements OnInit, OnDestroy {
   	private route: ActivatedRoute	
   	) {}
 
+	openp(pathwaym:any) {
+	    this.modalService.open(pathwaym).result.then((result) => {
+	      this.closeResult = `Closed with: ${result}`;
+	    }, (reason) => {
+	      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+	    });
+	  }
 	open(content:any) {
 	    this.modalService.open(content).result.then((result) => {
 	      this.closeResult = `Closed with: ${result}`;
@@ -48,6 +56,7 @@ export class PlayComponent implements OnInit, OnDestroy {
 	goToAction(){
 		this.node = this.nodes.find( item => item.id==this.choice );
 		this.pathway.push(this.node); // push the node in the pathway
+		window.scroll(0,0);
 	}
 
 	onSelectionChange(entry: any){
@@ -59,7 +68,7 @@ export class PlayComponent implements OnInit, OnDestroy {
 		    // this.sub = this.route.params.subscribe(params => {
 	     //   this.id = +params['id']; // (+) converts string 'id' to a number
 	       console.log('Play!!!');
-	       this.sub = this.http.get('assets/vps/1/data.json')
+	       this.sub = this.http.get('assets/vps/99/data.json')
 	       .subscribe(data => {
 			      // Read the result field from the JSON response.
 			      console.log( data['nodes'] );

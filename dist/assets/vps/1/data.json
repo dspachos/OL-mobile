@@ -13,8 +13,8 @@
 		],
 		"buttons": [
 			{"label": "Got to second node", "target_node": 2},
-			{"label": "Go to third node", "target_node": 4},
-			{"label": "Go to fourth node", "target_node": 3}
+			{"label": "Go to third node", "target_node": 3},
+			{"label": "Go to fourth node", "target_node": 4}
 		] 
 	},
 	{
