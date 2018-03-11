@@ -36,6 +36,7 @@ export class PlayComponent implements OnInit, OnDestroy {
 	    });
 	  }
 	open(content:any) {
+		console.log(this.node);
 	    this.modalService.open(content).result.then((result) => {
 	      this.closeResult = `Closed with: ${result}`;
 	    }, (reason) => {
@@ -68,7 +69,7 @@ export class PlayComponent implements OnInit, OnDestroy {
 		    // this.sub = this.route.params.subscribe(params => {
 	     //   this.id = +params['id']; // (+) converts string 'id' to a number
 	       console.log('Play!!!');
-	       this.sub = this.http.get('assets/vps/99/data.json')
+	       this.sub = this.http.get('assets/vps/44/data.json')
 	       .subscribe(data => {
 			      // Read the result field from the JSON response.
 			      console.log( data['nodes'] );
